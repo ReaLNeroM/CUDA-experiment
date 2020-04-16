@@ -1,0 +1,22 @@
+Testing CPU file
+0
+Testing GPU, unified memory version
+Compiling done, trying each of 4 variants
+add_1: 131ms
+0
+add_2: 147ms
+0
+add_3: 354ms
+0
+add_4: 124ms
+0
+Testing GPU, separate memory version
+Compiling done, trying each of 4 variants
+add_1: 43ms
+0
+add_2: 61ms
+0
+add_3: 92ms
+0
+add_4: 3ms
+0
