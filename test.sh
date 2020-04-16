@@ -1,8 +1,8 @@
 echo Testing CPU file
-g++ add.cpp && ./a.out
+g++ -std=c++11 add.cpp && ./a.out
 
 echo Testing GPU, unified memory version
-nvcc addManaged.cu
+nvcc -std=c++11 addManaged.cu
 
 echo Compiling done, trying each of 4 variants
 ./a.out 1
@@ -11,7 +11,7 @@ echo Compiling done, trying each of 4 variants
 ./a.out 4
 
 echo Testing GPU, separate memory version
-nvcc add.cu
+nvcc -std=c++11 add.cu
 
 echo Compiling done, trying each of 4 variants
 ./a.out 1

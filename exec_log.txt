@@ -1,22 +1,23 @@
 Testing CPU file
+add CPU: 2936us
 0
 Testing GPU, unified memory version
 Compiling done, trying each of 4 variants
-add_1: 131ms
+add_1: 81229us
 0
-add_2: 147ms
+add_2: 90589us
 0
-add_3: 354ms
+add_3: 307332us
 0
-add_4: 124ms
+add_4: 48558us
 0
 Testing GPU, separate memory version
 Compiling done, trying each of 4 variants
-add_1: 43ms
+add_1: 38148us
 0
-add_2: 61ms
+add_2: 66476us
 0
-add_3: 92ms
+add_3: 89894us
 0
-add_4: 3ms
+add_4: 2782us
 0
