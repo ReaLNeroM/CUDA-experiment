@@ -2,7 +2,7 @@
 #include <chrono>
 #include <cassert>
 
-__global__ void add_1(int n, double *x, double *y, double *ans){
+__global__ void add_1(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -11,7 +11,7 @@ __global__ void add_1(int n, double *x, double *y, double *ans){
     }
 }
 
-__global__ void add_2(int n, double *x, double *y, double *ans){
+__global__ void add_2(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -22,7 +22,7 @@ __global__ void add_2(int n, double *x, double *y, double *ans){
 }
 
 
-__global__ void add_3(int n, double *x, double *y, double *ans){
+__global__ void add_3(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -34,7 +34,7 @@ __global__ void add_3(int n, double *x, double *y, double *ans){
     }
 }
 
-__global__ void add_4(int n, double *x, double *y, double *ans){
+__global__ void add_4(int n, float *x, float *y, float *ans){
     int i = blockIdx.x * blockDim.x + threadIdx.x;
 
     if(i < n){
@@ -48,13 +48,13 @@ int main(int argc, char** argv){
 
     int n = (1 << 25);
 
-    double *x, *y, *ans;
+    float *x, *y, *ans;
 
-    cudaMallocManaged(&x, n * sizeof(double));
+    cudaMallocManaged(&x, n * sizeof(float));
     assert(x != NULL);
-    cudaMallocManaged(&y, n * sizeof(double));
+    cudaMallocManaged(&y, n * sizeof(float));
     assert(y != NULL);
-    cudaMallocManaged(&ans, n * sizeof(double));
+    cudaMallocManaged(&ans, n * sizeof(float));
     assert(ans != NULL);
 
     for(int i = 0; i < n; i++){
@@ -82,7 +82,7 @@ int main(int argc, char** argv){
     finish = std::chrono::high_resolution_clock::now();
     std::cout << "add_" << algo_type << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ms\n";
 
-    double err = 0.0;
+    float err = 0.0;
     for(int i = 0; i < n; i++){
         err += abs(ans[i] - 3.0);
     }

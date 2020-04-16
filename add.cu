@@ -3,7 +3,7 @@
 #include <cassert>
 #include <cstdlib>
 
-__global__ void add_1(int n, double *x, double *y, double *ans){
+__global__ void add_1(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -12,7 +12,7 @@ __global__ void add_1(int n, double *x, double *y, double *ans){
     }
 }
 
-__global__ void add_2(int n, double *x, double *y, double *ans){
+__global__ void add_2(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -23,7 +23,7 @@ __global__ void add_2(int n, double *x, double *y, double *ans){
 }
 
 
-__global__ void add_3(int n, double *x, double *y, double *ans){
+__global__ void add_3(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
     int stride = blockDim.x;
 
@@ -35,7 +35,7 @@ __global__ void add_3(int n, double *x, double *y, double *ans){
     }
 }
 
-__global__ void add_4(int n, double *x, double *y, double *ans){
+__global__ void add_4(int n, float *x, float *y, float *ans){
     int i = blockIdx.x * blockDim.x + threadIdx.x;
 
     ans[i] = x[i] + y[i];
@@ -47,13 +47,13 @@ int main(int argc, char** argv){
 
     int n = (1 << 25);
 
-    double *x, *y, *ans;
+    float *x, *y, *ans;
 
-    x = (double *) malloc(n * sizeof(double));
+    x = (float *) malloc(n * sizeof(float));
     assert(x != NULL);
-    y = (double *) malloc(n * sizeof(double));
+    y = (float *) malloc(n * sizeof(float));
     assert(y != NULL);
-    ans = (double *) malloc(n * sizeof(double));
+    ans = (float *) malloc(n * sizeof(float));
     assert(ans != NULL);
 
     for(int i = 0; i < n; i++){
@@ -61,16 +61,16 @@ int main(int argc, char** argv){
         y[i] = 2.0;
     }
 
-    double *d_x, *d_y, *d_ans;
-    cudaMalloc(&d_x, n * sizeof(double));
+    float *d_x, *d_y, *d_ans;
+    cudaMalloc(&d_x, n * sizeof(float));
     assert(d_x != NULL);
-    cudaMalloc(&d_y, n * sizeof(double));
+    cudaMalloc(&d_y, n * sizeof(float));
     assert(d_y != NULL);
-    cudaMalloc(&d_ans, n * sizeof(double));
+    cudaMalloc(&d_ans, n * sizeof(float));
     assert(d_ans != NULL);
 
-    cudaMemcpy(d_x, x, n * sizeof(double), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_y, y, n * sizeof(double), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_x, x, n * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_y, y, n * sizeof(float), cudaMemcpyHostToDevice);
 
     int grid_size = (n + 256 - 1) / 256;
 
@@ -91,9 +91,9 @@ int main(int argc, char** argv){
     finish = std::chrono::high_resolution_clock::now();
     std::cout << "add_" << algo_type << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ms\n";
 
-    cudaMemcpy(ans, d_ans, n * sizeof(double), cudaMemcpyDeviceToHost);
+    cudaMemcpy(ans, d_ans, n * sizeof(float), cudaMemcpyDeviceToHost);
 
-    double err = 0.0;
+    float err = 0.0;
     for(int i = 0; i < n; i++){
         err += abs(ans[i] - 3.0);
     }
