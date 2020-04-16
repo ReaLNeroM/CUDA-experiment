@@ -89,7 +89,7 @@ int main(int argc, char** argv){
     }
     cudaDeviceSynchronize();
     finish = std::chrono::high_resolution_clock::now();
-    std::cout << "add_" << algo_type << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ms\n";
+    std::cout << "add_" << algo_type << ": " << std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count() << "us\n";
 
     cudaMemcpy(ans, d_ans, n * sizeof(float), cudaMemcpyDeviceToHost);
 
