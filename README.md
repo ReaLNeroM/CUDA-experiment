@@ -11,7 +11,7 @@ native CUDA code using a compiler.
 Slides are attached describing the project in high-level detail. For more details, consult the
 Report PDF.
 
-## 📚 Table of contents
+## 📚Table of contents
 
 - [Technical stack](#technical-stack)
 - [Features](#features)
@@ -21,18 +21,18 @@ Report PDF.
 - [Author](#author)
 - [License](#license)
 
-## 🛠 Technical stack
+## 🛠Technical stack
 
 - Programming language(s): C++, Python
 - GPU Framework: [CUDA](https://developer.nvidia.com/cuda-zone)
 
-## 🚀 Features
+## 🚀Features
 
 - Novel .crc format which can be used to describe computational circuits.
 - A .crc to CUDA compiler.
 - Optimized CUDA implementations of prefix scan algorithms.
 
-## ⬇ Running
+## ⬇Running
 
 To run the CUDA optimizations benchmark, run
 
@@ -49,16 +49,16 @@ To run the CRC to CUDA compiler, run
 
 to get the CUDA kernel code.
 
-## 📝 Todo
+## 📝Todo
 
 - Develop the idea for an inductive representation of a circuit.
 - Add optimizations to the CUDA-generated code.
 
-## 🎉 Acknowledgements
+## 🎉Acknowledgements
 
 - professor Sreepathi Pai, for coming up with the idea, and assisting on CUDA concepts.
 
-## 👨‍💻 Author
+## 👨‍💻Author
 
 - [Vladimir Maksimovski](https://github.com/realnerom) <br/>
 Bachelor of Science in Computer Science.
