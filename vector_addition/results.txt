@@ -1,0 +1,8 @@
+Testing CPU file
+Finished CPU variant with stats: 86.356 ms, 1.55 GBPS
+Testing GPU
+Compiling done, trying each of 4 variants
+Finished GPU variant 4 with stats: 37.631 ms, 10.70 GBPS
+Finished GPU variant 2 with stats: 49.522 ms, 8.13 GBPS
+Finished GPU variant 3 with stats: 89.391 ms, 4.50 GBPS
+Finished GPU variant 4 with stats: 1.649 ms, 244.18 GBPS

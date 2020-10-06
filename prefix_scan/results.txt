@@ -1,0 +1,14 @@
+Testing CPU file
+prefix_scan: 570.307ms
+memory usage: 1073741824 bytes
+Finished prefix_scan.cpp with stats: 570.307 ms, 1.88 GBPS
+Testing naive_parallel.cu file
+Finished naive_parallel.cu with stats: 290.370 ms, 3.70 GBPS
+Testing parallel_banks.cu file
+Finished parallel_banks.cu with stats: 21.376 ms, 50.23 GBPS
+Testing parallel_main.cu file
+Finished parallel_main.cu with stats: 31.214 ms, 34.40 GBPS
+Testing parallel_reversed.cu file
+Finished parallel_reversed.cu with stats: 25.095 ms, 42.79 GBPS
+Testing parallel_strided.cu file
+Finished parallel_strided.cu with stats: 25.443 ms, 42.20 GBPS

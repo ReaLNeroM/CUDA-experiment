@@ -1,0 +1,12 @@
+# Implements a sum reduction using O(logn) stages
+# with O(n) work.
+sum 8 3 x
+0 0 += 1
+0 2 += 3
+0 4 += 5
+0 6 += 7
+
+1 0 += 2
+1 4 += 6
+
+2 0 += 4

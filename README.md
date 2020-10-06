@@ -1,9 +1,41 @@
-# CUDA-experiment
-Vector addition parallelized using CUDA.
+<p align="center"><img width=12.5% src="https://github.com/realnerom/EZPing/blob/master/images/EZPing.png"></p>
 
-# Documentation
-- test.sh - Compiles and executes all the code files below.
-- exec_log.sh - Execution log when I ran the shell script on gpu-node01.csug.rochester.edu.
-- add.cpp - simple CPU implementation of vector addition. Prints the amount of error of vector addition.
-- add.cu - GPU-parallelized implementation of vector addition, with 4 variants tested. Each vector is copied to the device and back to the host. For each variant, it prints out the amount of time taken, and then error amount (should be 0).
-- addManaged.cu - GPU-parallelized implementation of vector addition, with the same 4 variants tested. Here, memcpy is avoided by allocating memory which can be accessed by the device and host at the same time.
+# [Circuit to CUDA compiler](https://github.com/realnerom/Circuit-to-CUDA) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/realnerom/Circuit-to-CUDA/blob/master/LICENSE)
+
+Lorem ipsum dolor sit amet.
+
+## 📚 Table of contents
+
+- [Technical stack](#technical-stack)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+- [Features](#features)
+- [Installation](#installation)
+- [Todo](#todo)
+- [Author](#author)
+- [License](#license)
+
+## 🛠 Technical stack
+
+- Programming language(s): Lorem, Ipsum, Dolor
+
+## 🚀 Features
+- Lorem, Ipsum, Dolor
+
+## ⬇ Running
+
+- Lorem, Ipsum, Dolor.
+
+## 📝 Todo
+
+- Lorem, Ipsum, dolor.
+
+## 👨‍💻 Author
+
+- [Vladimir Maksimovski](https://github.com/realnerom) <br/>
+Pursuing Bachelor of Science in Computer Science.
+University of Rochester '22.
+
+## 📄 License
+
+The Circuit to CUDA copmiler is [MIT licensed](./LICENSE).

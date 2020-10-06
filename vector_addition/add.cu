@@ -1,6 +1,6 @@
 #include <iostream>
-#include <chrono>
 #include <cassert>
+#include <cstdlib>
 
 __global__ void add_1(int n, float *x, float *y, float *ans){
     int tid = threadIdx.x;
@@ -37,9 +37,7 @@ __global__ void add_3(int n, float *x, float *y, float *ans){
 __global__ void add_4(int n, float *x, float *y, float *ans){
     int i = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if(i < n){
-        ans[i] = x[i] + y[i];
-    }
+    ans[i] = x[i] + y[i];
 }
 
 int main(int argc, char** argv){
@@ -47,14 +45,15 @@ int main(int argc, char** argv){
     int algo_type = std::stoi(argv[1]);
 
     int n = (1 << 25);
+    std::cout << "memory usage: " << 3 * n * sizeof(float) << " bytes" << std::endl;
 
     float *x, *y, *ans;
 
-    cudaMallocManaged(&x, n * sizeof(float));
+    x = (float *) malloc(n * sizeof(float));
     assert(x != NULL);
-    cudaMallocManaged(&y, n * sizeof(float));
+    y = (float *) malloc(n * sizeof(float));
     assert(y != NULL);
-    cudaMallocManaged(&ans, n * sizeof(float));
+    ans = (float *) malloc(n * sizeof(float));
     assert(ans != NULL);
 
     for(int i = 0; i < n; i++){
@@ -62,25 +61,30 @@ int main(int argc, char** argv){
         y[i] = 2.0;
     }
 
+    float *d_x, *d_y, *d_ans;
+    cudaMalloc(&d_x, n * sizeof(float));
+    assert(d_x != NULL);
+    cudaMalloc(&d_y, n * sizeof(float));
+    assert(d_y != NULL);
+    cudaMalloc(&d_ans, n * sizeof(float));
+    assert(d_ans != NULL);
+
+    cudaMemcpy(d_x, x, n * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_y, y, n * sizeof(float), cudaMemcpyHostToDevice);
+
     int grid_size = (n + 256 - 1) / 256;
 
-    auto start = std::chrono::high_resolution_clock::now();
-    auto finish = std::chrono::high_resolution_clock::now();
-
-    start = std::chrono::high_resolution_clock::now();
     if(algo_type == 1){
-        add_1<<<1, 256>>>(n, x, y, ans);
+        add_1<<<1, 256>>>(n, d_x, d_y, d_ans);
     } else if(algo_type == 2){
-        add_2<<<1, 256>>>(n, x, y, ans);
+        add_2<<<1, 256>>>(n, d_x, d_y, d_ans);
     } else if(algo_type == 3){
-        add_3<<<1, 256>>>(n, x, y, ans);
+        add_3<<<1, 256>>>(n, d_x, d_y, d_ans);
     } else if(algo_type == 4){
-        add_4<<<grid_size, 256>>>(n, x, y, ans);
+        add_4<<<grid_size, 256>>>(n, d_x, d_y, d_ans);
     }
 
-    cudaDeviceSynchronize();
-    finish = std::chrono::high_resolution_clock::now();
-    std::cout << "add_" << algo_type << ": " << std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count() << "us\n";
+    cudaMemcpy(ans, d_ans, n * sizeof(float), cudaMemcpyDeviceToHost);
 
     float err = 0.0;
     for(int i = 0; i < n; i++){
@@ -89,7 +93,11 @@ int main(int argc, char** argv){
 
     std::cout << err << '\n';
 
-    cudaFree(x);
-    cudaFree(y);
-    cudaFree(ans);
+    cudaFree(d_x);
+    cudaFree(d_y);
+    cudaFree(d_ans);
+
+    free(x);
+    free(y);
+    free(ans);
 }

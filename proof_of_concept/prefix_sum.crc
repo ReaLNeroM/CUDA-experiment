@@ -1,0 +1,23 @@
+# Implements kogge_stone prefix scan
+# Requiring O(logn) barrier stages
+# and O(nlogn) work.
+kogge_stone 8 3 x
+0 1 += 0
+0 2 += 1
+0 3 += 2
+0 4 += 3
+0 5 += 4
+0 6 += 5
+0 7 += 6
+
+1 2 += 0
+1 3 += 1
+1 4 += 2
+1 5 += 3
+1 6 += 4
+1 7 += 5
+
+2 4 += 0
+2 5 += 1
+2 6 += 2
+2 7 += 3
