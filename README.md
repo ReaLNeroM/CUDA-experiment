@@ -15,7 +15,7 @@ Report PDF.
 
 - [Technical stack](#technical-stack)
 - [Features](#features)
-- [Installation](#installation)
+- [Installation](#running)
 - [Todo](#todo)
 - [Acknowledgements](#acknowledgements)
 - [Author](#author)
@@ -32,7 +32,7 @@ Report PDF.
 - A .crc to CUDA compiler.
 - Optimized CUDA implementations of prefix scan algorithms.
 
-## ⬇ Instructions on Running
+## ⬇ Running
 
 To run the CUDA optimizations benchmark, run
 
