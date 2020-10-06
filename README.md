@@ -15,7 +15,7 @@ Report PDF.
 
 - [Technical stack](#technical-stack)
 - [Features](#features)
-- [Installation](#running)
+- [Running](#running)
 - [Todo](#todo)
 - [Acknowledgements](#acknowledgements)
 - [Author](#author)
